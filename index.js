@@ -112,6 +112,12 @@ app.get('/excel', function(req, res) {
     });
 });
 
+app.get('/test', function(req, res) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+
+    res.end('test git');
+});
+
 function getMtId() {
     const symbols = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
 
