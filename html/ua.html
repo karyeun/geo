@@ -1,0 +1,57 @@
+
+
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.17/ua-parser.min.js"></script>
+        <script>
+            $(function() {
+                var uaString=navigator.userAgent;
+                var uaParser=new UAParser(uaString);
+                var ua=uaParser.getResult();
+                //console.log(ua);
+
+                var browser=ua.browser;
+                $('#browser').html(browser.name+" v"+browser.version);
+                console.log(browser);
+                var device=ua.device;
+                console.log(device);
+                $("#device").html(device.model+","+device.type+","+device.vendor);
+                var engine=ua.engine;
+                console.log(engine);
+                $("#engine").html(engine.name+" v"+engine.version);
+                var os=ua.os;
+                console.log(os);
+                $("#os").html(os.name+" v"+os.version);
+                var cpu=ua.cpu;
+                console.log(cpu);
+                $("#cpu").html(cpu.architecture);
+            });
+            
+        </script>
+    </head>
+    <body>
+        <h3><u>Browser</u></h5>
+        <div id="browser">
+        </div>
+        <h3><u>Device</u></h5>
+        <div id="device">
+        </div>
+        <h3><u>Engine</u></h5>
+        <div id="engine">
+        </div>
+        <h3><u>OS</u></h5>
+        <div id="os">
+        </div>
+        <h3><u>CPU</u></h5>
+        <div id="cpu">
+        </div>
+                                        
+        <br/>
+        <a href="./">Back</a>
+    </body>
+</html>

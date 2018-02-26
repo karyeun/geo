@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+        <script>
+            function handlePosition(pos)
+            {
+                $('#html5geolocation').html("["+pos.coords.latitude + ', ' + pos.coords.longitude+"]");
+            }
+
+            $(function() {
+                var sslSite= (location.protocol === 'https:');
+    
+                if(sslSite) {
+                    if ( navigator.geolocation ) {
+                        navigator.geolocation.getCurrentPosition(handlePosition);
+                    }
+                }
+                else {
+                    $.get("http://ip-api.com/json", function( data ) {
+                        $( "#info" ).html('lon: '+ data.lon+"</br/>"+
+                            'lat: '+ data.lat+"</br>"+
+                            'city: '+ data.city +"</br>"+
+                            'county: '+ data.country +"<br/>"+
+                            'zip: '+ data.zip);
+                        });
+                }   
+            });
+        </script>
+    </head>
+    <body>
+        <h3><u>Geo-location</u></h5>
+        <div id="info"></div>
+        <br/>
+        <br/>
+        <div id="html5geolocation"></div>
+        <br/>
+        <br/>
+        <a href="./">Back</a>
+    </body>
+</html>
