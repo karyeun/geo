@@ -144,6 +144,23 @@ function getMtIdNumeric(len) {
     return mtId;
 }
 
+app.get('/push/ice', function(req, res) {
+    //res.writeHead(200, { "Content-Type": "text/html" });
+
+    var msisdn = req.headers['x-premio-sms-oa'];
+    if (msisdn == undefined || msisdn == null) {
+        res.append('x-premio-sms-errorcode', 'err');
+        res.writeHead(400, { "Content-Type": "text/html" });
+    } else {
+        res.append('x-premio-sms-refid', getMtIdNumeric(6));
+        res.append('x-premio-sms-smsid', getMtIdNumeric(6));
+        res.append('x-premio-sms-trans-split', 'split');
+        res.writeHead(200, { "Content-Type": "text/html" });
+    }
+
+    res.end();
+});
+
 app.get('/push/mexcomm', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/xml" });
 
