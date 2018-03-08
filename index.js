@@ -144,10 +144,10 @@ function getMtIdNumeric(len) {
     return mtId;
 }
 
-app.get('/push/ice', function(req, res) {
+app.post('/push/ice', function(req, res) {
     //res.writeHead(200, { "Content-Type": "text/html" });
 
-    var msisdn = req.headers['x-premio-sms-oa'];
+    var msisdn = req.headers['x-premio-sms-da'];
     if (msisdn == undefined || msisdn == null) {
         res.append('x-premio-sms-errorcode', 'err');
         res.writeHead(400, { "Content-Type": "text/html" });
