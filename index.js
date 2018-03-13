@@ -147,6 +147,10 @@ function getMtIdNumeric(len) {
 app.post('/push/ice', function(req, res) {
     //res.writeHead(200, { "Content-Type": "text/html" });
 
+    for (var hkey in req.headers) {
+        req.headers[hkey.toLowerCase()] = req.headers[hkey];
+    }
+
     var msisdn = req.headers['x-premio-sms-da'];
     if (msisdn == undefined || msisdn == null) {
         res.append('x-premio-sms-errorcode', 'err');
@@ -163,6 +167,10 @@ app.post('/push/ice', function(req, res) {
 
 app.get('/push/mexcomm', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/xml" });
+
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
 
     var msisdn = req.query.msisdn;
     if (msisdn == undefined || msisdn == null)
@@ -184,6 +192,10 @@ app.get('/push/mexcomm', function(req, res) {
 app.get('/push/mmp', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
 
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
+
     var msisdn = req.query.msisdn;
     if (msisdn == undefined || msisdn == null)
         res.write('401');
@@ -195,6 +207,10 @@ app.get('/push/mmp', function(req, res) {
 
 app.get('/push/mk', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
+
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
 
     var msisdn = req.query.to;
     if (msisdn == undefined || msisdn == null)
