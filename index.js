@@ -153,13 +153,19 @@ app.post('/push/ice', function(req, res) {
 
     var msisdn = req.headers['x-premio-sms-da'];
     if (msisdn == undefined || msisdn == null) {
-        res.append('x-premio-sms-errorcode', 'err');
-        res.writeHead(400, { "Content-Type": "text/html" });
+        //res.append('x-premio-sms-errorcode', 'err');
+        res.writeHead(400, {
+            "Content-Type": "text/html",
+            'x-premio-sms-errorcode': 'err'
+        });
     } else {
-        res.append('x-premio-sms-refid', getMtIdNumeric(6));
-        res.append('x-premio-sms-smsid', getMtIdNumeric(6));
-        res.append('x-premio-sms-trans-split', 'split');
-        res.writeHead(200, { "Content-Type": "text/html" });
+        var mtid = getMtIdNumeric(6);
+        res.writeHead(200, {
+            "Content-Type": "text/html",
+            'x-premio-sms-refid': mtid,
+            'x-premio-sms-trans-id': mtid,
+            'x-premio-sms-trans-split': 'split'
+        });
     }
 
     res.end();
