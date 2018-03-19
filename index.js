@@ -149,18 +149,28 @@ function getMtIdNumeric(len) {
     return mtId;
 }
 
-app.get('/push/ice', function(req, res) {
+app.post('/push/ice', function(req, res) {
     //res.writeHead(200, { "Content-Type": "text/html" });
 
-    var msisdn = req.headers['x-premio-sms-oa'];
+    for (var hkey in req.headers) {
+        req.headers[hkey.toLowerCase()] = req.headers[hkey];
+    }
+
+    var msisdn = req.headers['x-premio-sms-da'];
     if (msisdn == undefined || msisdn == null) {
-        res.append('x-premio-sms-errorcode', 'err');
-        res.writeHead(400, { "Content-Type": "text/html" });
+        //res.append('x-premio-sms-errorcode', 'err');
+        res.writeHead(400, {
+            "Content-Type": "text/html",
+            'x-premio-sms-errorcode': 'err'
+        });
     } else {
-        res.append('x-premio-sms-refid', getMtIdNumeric(6));
-        res.append('x-premio-sms-smsid', getMtIdNumeric(6));
-        res.append('x-premio-sms-trans-split', 'split');
-        res.writeHead(200, { "Content-Type": "text/html" });
+        var mtid = getMtIdNumeric(6);
+        res.writeHead(200, {
+            "Content-Type": "text/html",
+            'x-premio-sms-refid': mtid,
+            'x-premio-sms-trans-id': mtid,
+            'x-premio-sms-trans-split': 'split'
+        });
     }
 
     res.end();
@@ -168,6 +178,10 @@ app.get('/push/ice', function(req, res) {
 
 app.get('/push/mexcomm', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/xml" });
+
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
 
     var msisdn = req.query.msisdn;
     if (msisdn == undefined || msisdn == null)
@@ -189,6 +203,10 @@ app.get('/push/mexcomm', function(req, res) {
 app.get('/push/mmp', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
 
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
+
     var msisdn = req.query.msisdn;
     if (msisdn == undefined || msisdn == null)
         res.write('401');
@@ -200,6 +218,10 @@ app.get('/push/mmp', function(req, res) {
 
 app.get('/push/mk', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
+
+    for (var key in req.query) {
+        req.query[key.toLowerCase()] = req.query[key];
+    }
 
     var msisdn = req.query.to;
     if (msisdn == undefined || msisdn == null)
