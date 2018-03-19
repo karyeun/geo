@@ -119,7 +119,6 @@ app.get('/fr', function(req, res) {
 
 app.get('/test', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
-
     res.end('test git');
 });
 
