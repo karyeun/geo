@@ -112,6 +112,11 @@ app.get('/excel', function(req, res) {
     });
 });
 
+app.get('/fr', function(req, res) {
+    console.log('> ' + req.headers.referer);
+    res.end('call from> ' + req.headers.referer);
+});
+
 app.get('/test', function(req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
 
